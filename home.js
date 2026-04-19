@@ -3,7 +3,7 @@ document.getElementById("logout-button").addEventListener('click', function () {
     window.location.href='./index.html'
 })
 
-
+// add money 
 const validPin=1234
 document.getElementById("add-money-btn").addEventListener('click', function (e) {
     e.preventDefault()
@@ -40,6 +40,46 @@ document.getElementById("add-money-btn").addEventListener('click', function (e) 
       totalNewAvailableBalance;
 })
 
+
+// cash out
+
+document.getElementById("Withdraw-btn").addEventListener('click', function (e) {
+    e.preventDefault()
+
+    const agentNumber = document.getElementById("agent-number").value;
+
+    const cashAmount = parseInt(document.getElementById("cash-amount").value);
+
+    const pin = parseInt(document.getElementById("cash-out-pin").value);
+
+
+    const availableBalance = parseInt(
+      document.getElementById("available-balance").innerText,
+    );
+
+    if (agentNumber.length < 11) {
+        alert("please provide valid agent number");
+        return
+    }
+    if (pin !== validPin) {
+      alert("please provide valid pin number");
+      return;
+    }
+    
+
+
+    const totalNewBalance = availableBalance - cashAmount;
+    if (totalNewBalance <0) {
+      alert("No balance");
+      return;
+    }
+
+    document.getElementById("available-balance").innerText = totalNewBalance
+    
+    
+    
+
+})
 
 
 // toggling feature
