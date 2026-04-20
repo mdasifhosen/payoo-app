@@ -70,6 +70,10 @@ document
     const accountNumber = getInputValueNumber("account-number");
 
     const amount = getInputValueNumber("add-amount");
+    if (amount <= 0) {
+      alert("invalid amount")
+      return
+    }
 
     const pin = getInputValueNumber("add-pin");
 
@@ -114,6 +118,10 @@ document.getElementById("Withdraw-btn").addEventListener("click", function (e) {
   const pin = getInputValueNumber("cash-out-pin");
 
   const availableBalance = getInnerText("available-balance");
+  if (cashAmount <= 0 || cashAmount > availableBalance) {
+    alert('invalid amount')
+    return
+  }
 
   if (agentNumber.length < 11) {
     alert("please provide valid agent number");
