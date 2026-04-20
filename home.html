@@ -66,7 +66,7 @@
             <p class="text-center mt-1">Get Bonus</p>
         </div>
 
-        <div class="rounded-xl cursor-pointer border-2 border-gray-300 p-3">
+        <div id="pay-bill-btn" class="rounded-xl cursor-pointer border-2 border-gray-300 p-3">
             <img class="mx-auto" src="./assets/purse1.png" alt="">
             <p class="text-center mt-1">Pay Bill</p>
         </div>
@@ -140,12 +140,69 @@
 
         <div id="transfer-money-parent" style="display: none;" class="form">
             <h1 class="font-bold text-[18px] text-[#080808] my-5">Transfer Money</h1>
+
+            <form class="bg-[#FFFFFF] rounded-2xl p-8">
+
+            <div class="mt-4">
+                <label class="font-medium" for="">User Account Number</label><br>
+                <input id="transfer-number" type="text" placeholder="Enter 11 digit number" class="input mt-3 bg-[#f4f5f7] rounded-3xl w-full" />
+           </div>
+            <div class="mt-4">
+                <label class="font-medium" for="">Amount</label><br>
+                <input id="transfer-amount" type="text" placeholder="Enter amount to transfer" class="input mt-3 bg-[#f4f5f7] rounded-3xl w-full" />
+           </div>
+            <div class="mt-4">
+                <label class="font-medium" for="">Pin Number</label><br>
+                <input id="transfer-pin" type="text" placeholder="Enter 4 digit pin number" class="input mt-3 bg-[#f4f5f7] rounded-3xl w-full" />
+           </div>
+
+           <button id="transfer-btn"  class="btn bg-[#0874F2] text-white mt-5 rounded-3xl w-full my-6">Send Now</button>
+            </form>
         </div>
 
         <!-- get bonus -->
         <div id="get-bonus-parent" style="display: none;" class="form">
             <h1 class="font-bold text-[18px] text-[#080808] my-5">Get Bonus</h1>
+            <form class="bg-[#FFFFFF] rounded-2xl p-8">
+                <div class="mt-4">
+                <label class="font-medium" for="">Enter Bonus Coupon</label><br>
+                <input id="bonus-coupon" type="text" placeholder="Enter your coupon" class="input mt-3 bg-[#f4f5f7] rounded-3xl w-full" />
+           </div>
+           <button id="bonus-btn"  class="btn bg-[#0874F2] text-white mt-5 rounded-3xl w-full my-6">Get Bonus</button>
+            </form>
         </div>
+
+
+        <!-- pay bill -->
+          <div id="pay-bill-parent" class="form">
+            <h1 class="font-bold text-[18px] text-[#080808] my-5">Pay Bill</h1>
+            <form class="bg-[#FFFFFF] rounded-2xl p-8">
+                <div>
+                    <h1  class="font-medium text-[16px]">Select To Pay</h1>
+                    <select id="pay" class="select mt-3 bg-[#f4f5f7] rounded-3xl w-full">
+                        <option value="" disabled selected>Select back</option>
+            <option value="AB Bank">Electricity Bill</option>
+            <option value="IFIC Bank">Education Bill</option>
+            <option value="Dutch Bangla Bank">Gas Bill</option>
+                    </select>
+                </div>
+
+            <div class="mt-4">
+                <label class="font-medium" for="">Biller Account Number</label><br>
+                <input id="biller-account-number" type="text" placeholder="Enter account number" class="input mt-3 bg-[#f4f5f7] rounded-3xl w-full" />
+           </div>
+            <div class="mt-4">
+                <label class="font-medium" for="">Amount to Pay</label><br>
+                <input id="pay-amount" type="text" placeholder="Add Amount to pay" class="input mt-3 bg-[#f4f5f7] rounded-3xl w-full" />
+           </div>
+            <div class="mt-4">
+                <label class="font-medium" for="">Pin Number</label><br>
+                <input id="pay-bill-pin" type="text" placeholder="Enter 4 digit pin number" class="input mt-3 bg-[#f4f5f7] rounded-3xl w-full" />
+           </div>
+
+           <button id="pay-btn"  class="btn bg-[#0874F2] text-white mt-5 rounded-3xl w-full my-6">Pay Now</button>
+            </form>
+
     </div>
 
     <script src="./home.js"></script>

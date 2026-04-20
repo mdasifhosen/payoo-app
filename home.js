@@ -124,13 +124,128 @@ document.getElementById("Withdraw-btn").addEventListener("click", function (e) {
   setInnerText(totalNewBalance);
 });
 
+
+// transfer money
+document.getElementById("transfer-btn").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const agentNumber = getInputValueNumber("transfer-number");
+
+  const cashAmount = getInputValueNumber("transfer-amount");
+
+  const pin = getInputValueNumber("transfer-pin");
+
+  const availableBalance = getInnerText("available-balance");
+
+  if (agentNumber.length < 11) {
+    alert("please provide valid agent number");
+    return;
+  }
+  if (pin !== validPin) {
+    alert("please provide valid pin number");
+    return;
+  }
+
+  const totalNewBalance = availableBalance - cashAmount;
+  if (totalNewBalance < 0) {
+    alert("No balance");
+    return;
+  }
+
+  // document.getElementById("available-balance").innerText = totalNewBalance
+  setInnerText(totalNewBalance);
+});
+
+
+// bonus system get bonus
+const usedCoupons = [];
+
+document.getElementById("bonus-btn").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const coupon = document.getElementById("bonus-coupon").value.trim();
+  const availableBalance = getInnerText("available-balance");
+
+  const validCoupons = {
+    "bonus": 1000,
+    "free": 500
+  };
+
+  // check valid coupon
+  if (!validCoupons[coupon]) {
+    alert("❌ Invalid Coupon!");
+    return;
+  }
+
+  // check already used
+  if (usedCoupons.includes(coupon)) {
+    alert("⚠️ Coupon already used!");
+    return;
+  }
+
+  const bonusAmount = validCoupons[coupon];
+
+  const newBalance = availableBalance + bonusAmount;
+
+  // update UI
+  setInnerText(newBalance);
+
+  // save used coupon
+  usedCoupons.push(coupon);
+
+  alert("🎉 Bonus Added: " + bonusAmount + "৳");
+
+  // clear input
+  document.getElementById("bonus-coupon").value = "";
+});
+
+// pay bill
+document.getElementById("pay-btn").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const bank = getInputValue("pay");
+
+  const accountNumber = getInputValueNumber("biller-account-number");
+
+  const amount = getInputValueNumber("pay-amount");
+
+  const pin = getInputValueNumber("pay-bill-pin");
+
+  const availableBalance = getInnerText("available-balance");
+
+  if (bank === "pay") {
+    alert("Please select a bank");
+    return;
+  }
+
+  if (accountNumber.length < 11) {
+    alert("please provide valid account number");
+    return;
+  }
+
+  if (pin !== validPin) {
+    alert("please provide valid pin number");
+    return;
+  }
+
+  const totalNewAvailableBalance = availableBalance-amount;
+
+  setInnerText(totalNewAvailableBalance);
+});
+
+
+
 // toggling feature
 
+
+// add button
 document.getElementById("add-button").addEventListener("click", function () {
   handleToggle("add-money-parent");
   handleButtonToggle('add-button')
 });
 
+
+// cash out button
 document
   .getElementById("cash-out-button")
   .addEventListener("click", function () {
@@ -138,6 +253,8 @@ document
     handleButtonToggle("cash-out-button");
   });
 
+
+  // transfer button
 document
   .getElementById("transfer-button")
   .addEventListener("click", function () {
@@ -145,12 +262,23 @@ document
     handleButtonToggle("transfer-button");
   });
 
+  // get bonus button
 document
   .getElementById("get-bonus-button")
   .addEventListener("click", function () {
     handleToggle("get-bonus-parent");
     handleButtonToggle("get-bonus-button");
   });
+
+// pay bill toggle
+  document
+    .getElementById("pay-bill-btn")
+    .addEventListener("click", function () {
+      handleToggle("pay-bill-parent");
+      handleButtonToggle("pay-bill-btn");
+    });
+
+
 
 // document
 //   .getElementById("transfer-button")
