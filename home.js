@@ -1,3 +1,6 @@
+const validPin = 1234;
+const transactionsData=[]
+
 // logout
 document.getElementById("logout-button").addEventListener("click", function () {
   window.location.href = "./index.html";
@@ -56,7 +59,7 @@ function handleButtonToggle(id) {
 }
 
 // add money
-const validPin = 1234;
+
 document
   .getElementById("add-money-btn")
   .addEventListener("click", function (e) {
@@ -90,6 +93,13 @@ document
     const totalNewAvailableBalance = amount + availableBalance;
 
     setInnerText(totalNewAvailableBalance);
+
+    const data = {
+      name: 'Add Money',
+      date:new Date().toLocaleTimeString()
+    }
+    transactionsData.push(data)
+    
   });
 
 // cash out
@@ -122,8 +132,14 @@ document.getElementById("Withdraw-btn").addEventListener("click", function (e) {
 
   // document.getElementById("available-balance").innerText = totalNewBalance
   setInnerText(totalNewBalance);
-});
 
+  const data = {
+    name: "Cash Out",
+    date: new Date().toLocaleTimeString(),
+  };
+  transactionsData.push(data);
+  
+});
 
 // transfer money
 document.getElementById("transfer-btn").addEventListener("click", function (e) {
@@ -154,8 +170,12 @@ document.getElementById("transfer-btn").addEventListener("click", function (e) {
 
   // document.getElementById("available-balance").innerText = totalNewBalance
   setInnerText(totalNewBalance);
+  const data = {
+    name: "Transfer Money",
+    date: new Date().toLocaleTimeString(),
+  };
+  transactionsData.push(data);
 });
-
 
 // bonus system get bonus
 const usedCoupons = [];
@@ -167,8 +187,8 @@ document.getElementById("bonus-btn").addEventListener("click", function (e) {
   const availableBalance = getInnerText("available-balance");
 
   const validCoupons = {
-    "bonus": 1000,
-    "free": 500
+    bonus: 1000,
+    free: 500,
   };
 
   // check valid coupon
@@ -197,6 +217,12 @@ document.getElementById("bonus-btn").addEventListener("click", function (e) {
 
   // clear input
   document.getElementById("bonus-coupon").value = "";
+
+  const data = {
+    name: "Get Bonus",
+    date: new Date().toLocaleTimeString(),
+  };
+  transactionsData.push(data);
 });
 
 // pay bill
@@ -213,7 +239,7 @@ document.getElementById("pay-btn").addEventListener("click", function (e) {
 
   const availableBalance = getInnerText("available-balance");
 
-  if (bank === "pay") {
+  if (pay === "pay") {
     alert("Please select a bank");
     return;
   }
@@ -228,22 +254,52 @@ document.getElementById("pay-btn").addEventListener("click", function (e) {
     return;
   }
 
-  const totalNewAvailableBalance = availableBalance-amount;
+  const totalNewAvailableBalance = availableBalance - amount;
 
   setInnerText(totalNewAvailableBalance);
+
+  const data = {
+    name: "Pay Bil ",
+    date: new Date().toLocaleTimeString(),
+  };
+  transactionsData.push(data);
 });
 
+// transactions
 
+document.getElementById("transactions-btn").addEventListener('click', function () {
+  const transactionContainer = document.getElementById("transaction-container");
+  transactionContainer.innerText=''
 
+  for (const data of transactionsData) {
+    const div = document.createElement("div")
+    div.innerHTML = `
+    <div class=" bg-white rounded-b-xl p-3 flex justify-between items-center mt-3">
+                <div class="flex items-center">
+                <div class=" p-3 rounded-full bg-[#f4f5f7]">
+                    <img src="./assets/wallet1.png" alt="">
+                </div>
+            <div class="ml-3">
+                <h1>${data.name}</h1>
+                <p>${data.date}</p>
+            </div>
+         </div>
+         <i class="fa-solid fa-ellipsis rotate-90"></i>
+            </div>
+    
+    
+    `
+    transactionContainer.appendChild(div)
+  }
+  
+})
 // toggling feature
-
 
 // add button
 document.getElementById("add-button").addEventListener("click", function () {
   handleToggle("add-money-parent");
-  handleButtonToggle('add-button')
+  handleButtonToggle("add-button");
 });
-
 
 // cash out button
 document
@@ -253,8 +309,7 @@ document
     handleButtonToggle("cash-out-button");
   });
 
-
-  // transfer button
+// transfer button
 document
   .getElementById("transfer-button")
   .addEventListener("click", function () {
@@ -262,7 +317,7 @@ document
     handleButtonToggle("transfer-button");
   });
 
-  // get bonus button
+// get bonus button
 document
   .getElementById("get-bonus-button")
   .addEventListener("click", function () {
@@ -271,14 +326,18 @@ document
   });
 
 // pay bill toggle
-  document
-    .getElementById("pay-bill-btn")
-    .addEventListener("click", function () {
-      handleToggle("pay-bill-parent");
-      handleButtonToggle("pay-bill-btn");
-    });
+document.getElementById("pay-bill-btn").addEventListener("click", function () {
+  handleToggle("pay-bill-parent");
+  handleButtonToggle("pay-bill-btn");
+});
 
-
+// transactions
+document
+  .getElementById("transactions-btn")
+  .addEventListener("click", function () {
+    handleToggle("transactions-parent");
+    handleButtonToggle("transactions-btn");
+  });
 
 // document
 //   .getElementById("transfer-button")
