@@ -239,7 +239,7 @@ document.getElementById("pay-btn").addEventListener("click", function (e) {
 
   const availableBalance = getInnerText("available-balance");
 
-  if (pay === "pay") {
+  if (bank === "pay") {
     alert("Please select a bank");
     return;
   }
@@ -259,7 +259,7 @@ document.getElementById("pay-btn").addEventListener("click", function (e) {
   setInnerText(totalNewAvailableBalance);
 
   const data = {
-    name: "Pay Bil ",
+    name: "Pay Bil",
     date: new Date().toLocaleTimeString(),
   };
   transactionsData.push(data);
